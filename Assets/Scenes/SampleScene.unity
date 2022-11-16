@@ -873,6 +873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedModifier: 0.0009
+  speedLaunch: 2
 --- !u!54 &631758517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -902,6 +903,7 @@ GameObject:
   - component: {fileID: 695532555}
   - component: {fileID: 695532554}
   - component: {fileID: 695532557}
+  - component: {fileID: 695532558}
   m_Layer: 0
   m_Name: Target4
   m_TagString: Untagged
@@ -917,7 +919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695532552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.69, y: 1, z: 0}
+  m_LocalPosition: {x: 4.74, y: 1, z: 0}
   m_LocalScale: {x: 4.04, y: 10, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1003,6 +1005,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &695532558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695532552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf84cbf8a6dea54bac2e1c961f29f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleX: 4.04
+  scaleY: 10
+  scaleZ: 0.5
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedModifier: 0.0009
+  speedLaunch: 2
   lives: 3
 --- !u!54 &710410741
 Rigidbody:
@@ -1647,6 +1665,7 @@ GameObject:
   - component: {fileID: 1369138602}
   - component: {fileID: 1369138601}
   - component: {fileID: 1369138604}
+  - component: {fileID: 1369138605}
   m_Layer: 0
   m_Name: Target1
   m_TagString: Untagged
@@ -1748,6 +1767,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &1369138605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369138599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf84cbf8a6dea54bac2e1c961f29f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleX: 5.24
+  scaleY: 3.66
+  scaleZ: 0.5
 --- !u!1 &1384382595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1795,7 @@ GameObject:
   - component: {fileID: 1384382598}
   - component: {fileID: 1384382597}
   - component: {fileID: 1384382600}
+  - component: {fileID: 1384382601}
   m_Layer: 0
   m_Name: Target3
   m_TagString: Untagged
@@ -1776,7 +1811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384382595}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.67, y: 1, z: 0}
+  m_LocalPosition: {x: -4.72, y: 1, z: 0}
   m_LocalScale: {x: 4.04, y: 10, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1862,6 +1897,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &1384382601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384382595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf84cbf8a6dea54bac2e1c961f29f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleX: 4.04
+  scaleY: 10
+  scaleZ: 0.5
 --- !u!1 &1387394097
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,6 +2239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedModifier: 0.0009
+  speedLaunch: 2
   life: 1
 --- !u!54 &1616216356
 Rigidbody:
@@ -2331,6 +2382,7 @@ GameObject:
   - component: {fileID: 1708676530}
   - component: {fileID: 1708676529}
   - component: {fileID: 1708676532}
+  - component: {fileID: 1708676533}
   m_Layer: 0
   m_Name: Target2
   m_TagString: Untagged
@@ -2346,7 +2398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708676527}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -5.91, z: 0}
+  m_LocalPosition: {x: -0.01, y: -5.99, z: 0}
   m_LocalScale: {x: 5.24, y: 3.66, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2432,6 +2484,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &1708676533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708676527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf84cbf8a6dea54bac2e1c961f29f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleX: 5.24
+  scaleY: 3.66
+  scaleZ: 0.5
 --- !u!1 &1823208335
 GameObject:
   m_ObjectHideFlags: 0

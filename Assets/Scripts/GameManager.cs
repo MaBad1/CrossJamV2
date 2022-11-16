@@ -47,8 +47,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
 
+        shape.gameObject.SetActive(false);
+        shapeMedium.gameObject.SetActive(false);
+        shapeHard.gameObject.SetActive(false);
         score.gameObject.SetActive(false);
         bestScore.gameObject.SetActive(true);
         bestScore.text = "High score :" + PlayerPrefs.GetInt("bestScoreCurrent").ToString();
@@ -155,6 +157,7 @@ public class GameManager : MonoBehaviour
     void StartGameMedium()
     {
         gameState = State.InGameMedium;
+        shapeMedium.gameObject.SetActive(true);
 
         shapeMedium.gameObject.transform.position = new Vector3(0, 1, 0);
 
@@ -175,6 +178,7 @@ public class GameManager : MonoBehaviour
     void StartGameHard()
     {
         gameState = State.InGameHard;
+        shapeHard.gameObject.SetActive(true);
 
         shapeHard.gameObject.transform.position = new Vector3(0, 1, 0);
 
@@ -195,6 +199,7 @@ public class GameManager : MonoBehaviour
     void StartGameEasy()
     {
         gameState = State.InGameEasy;
+        shape.gameObject.SetActive(true);
 
         shape.gameObject.transform.position = new Vector3(0, 1, 0);
 
@@ -264,11 +269,13 @@ public class GameManager : MonoBehaviour
     {
         scoreCurrent++;
         score.text = score.ToString();
+        
     }
     public void RemoveScore()
     {
         scoreCurrent--;
         score.text = score.ToString();
+        
     }
 
     public void GameOver()
@@ -289,5 +296,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    
 
 }
