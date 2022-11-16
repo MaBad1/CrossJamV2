@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedModifier: 0.0009
-  speedLaunch: 2
+  speedLaunch: 5
 --- !u!54 &631758517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedModifier: 0.0009
-  speedLaunch: 2
+  speedLaunch: 5
   lives: 3
 --- !u!54 &710410741
 Rigidbody:
@@ -2239,7 +2239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedModifier: 0.0009
-  speedLaunch: 2
+  speedLaunch: 5
   life: 1
 --- !u!54 &1616216356
 Rigidbody:

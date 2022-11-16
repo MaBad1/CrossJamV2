@@ -33,22 +33,22 @@ public class Shapes : MonoBehaviour
 
         }
 
-        if (transform.position.x <= -0.8) 
+        if (transform.position.x <= -0.7) 
         {
             Left();
         }
 
-        if (transform.position.x >= 0.8)
+        if (transform.position.x >= 0.7)
         {
             Right();
         }
 
-        if (transform.position.y <= 0)
+        if (transform.position.y <= 0.2)
         {
             Down();
         }
 
-        if (transform.position.y >= 2)
+        if (transform.position.y >= 1.8)
         {
             Up();
         }
