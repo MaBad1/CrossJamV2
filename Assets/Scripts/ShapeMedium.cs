@@ -39,6 +39,16 @@ public class ShapeMedium : MonoBehaviour
             Left();
         }
 
+        if (transform.position.x <= -0.4 && transform.position.y < 1.8 && transform.position.y > 0.2)
+        {
+            Left();
+        }
+
+        if (transform.position.x >= 0.4 && transform.position.y < 1.8 && transform.position.y > 0.2)
+        {
+            Right();
+        }
+
         if (transform.position.x >= 0.7)
         {
             Right();

@@ -96,11 +96,19 @@ public class GameManager : MonoBehaviour
         {
             
             score.text = scoreCurrent.ToString();
-            if (timer > 0)
+            if (timer > 5)
             {
                 timer -= Time.fixedDeltaTime;
                 timerInt = (int)timer;
                 textTimer.text = timerInt.ToString();
+            }
+            else if ( timer <= 5 && timer > 0)
+            {
+                timer -= Time.fixedDeltaTime;
+                timerInt = (int)timer;
+                textTimer.text = timerInt.ToString();
+                textTimer.GetComponent<Text>().color = Color.red;
+                textTimer.fontSize = 155;
             }
             else
             {
@@ -111,11 +119,19 @@ public class GameManager : MonoBehaviour
         {
 
             score.text = scoreCurrent.ToString();
-            if (timer > 0 && FindObjectOfType<ShapeMedium>().lives > 0)
+            if (timer > 5 && FindObjectOfType<ShapeMedium>().lives > 0)
             {
                 timer -= Time.fixedDeltaTime;
                 timerInt = (int)timer;
                 textTimer.text = timerInt.ToString();
+            }
+            else if (timer <= 5 && timer > 0 && FindObjectOfType<ShapeMedium>().lives > 0)
+            {
+                timer -= Time.fixedDeltaTime;
+                timerInt = (int)timer;
+                textTimer.text = timerInt.ToString();
+                textTimer.GetComponent<Text>().color = Color.red;
+                textTimer.fontSize = 155;
             }
             else
             {
@@ -126,11 +142,19 @@ public class GameManager : MonoBehaviour
         {
 
             score.text = scoreCurrent.ToString();
-            if (timer > 0 && FindObjectOfType<ShapeHard>().life > 0)
+            if (timer > 5 && FindObjectOfType<ShapeHard>().life > 0)
             {
                 timer -= Time.fixedDeltaTime;
                 timerInt = (int)timer;
                 textTimer.text = timerInt.ToString();
+            }
+            else if (timer <= 5 && timer > 0 && FindObjectOfType<ShapeHard>().life > 0)
+            {
+                timer -= Time.fixedDeltaTime;
+                timerInt = (int)timer;
+                textTimer.text = timerInt.ToString();
+                textTimer.GetComponent<Text>().color = Color.red;
+                textTimer.fontSize = 155;
             }
             else
             {
@@ -267,28 +291,38 @@ public class GameManager : MonoBehaviour
 
     public void AddScore()
     {
+        score.GetComponent<Text>().color = Color.green;
+        score.fontSize = 160;
         scoreCurrent++;
         score.text = score.ToString();
-        
+        Invoke("ResetFxText", 0.3f);
     }
     public void RemoveScore()
     {
+        score.GetComponent<Text>().color = Color.red;
+        score.fontSize = 160;
         scoreCurrent--;
         score.text = score.ToString();
-        
+        FindObjectOfType<CamShake>().shakecamera();
+        Invoke("ResetFxText", 0.3f);
     }
 
     public void GameOver()
     {
+        gameState = State.GameOver;
+
         if (scoreCurrent > bestScoreCurrent)
         {
             PlayerPrefs.SetInt("bestScoreCurrent", scoreCurrent);
+            bestScore.GetComponent<Text>().color = Color.yellow;
         }
-    
-        gameState = State.GameOver;
+        else
+        {
+            bestScore.GetComponent<Text>().color = Color.white;
+        }
+
         bestScore.gameObject.SetActive(true);
         score.gameObject.SetActive(false);
-
         Invoke("Restart", 2f);
       }  
 
@@ -297,6 +331,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
-    
+    void ResetFxText()
+    {
+        score.fontSize = 150;
+        score.GetComponent<Text>().color = Color.white;
+    }
+
+
 
 }
