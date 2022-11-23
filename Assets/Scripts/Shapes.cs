@@ -1,73 +1,111 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Shapes : MonoBehaviour
 {
     private Touch touch;
     public float speedModifier;
     public float speedLaunch;
-    private Vector3 target1 = new Vector3(1, 7, 0);
-    private Vector3 target2 = new Vector3(1, -6, 0);
-    private Vector3 target3 = new Vector3(-2, 1, 0);
-    private Vector3 target4 = new Vector3(2, 1, 0);
+    public float distanceMin = 100;
+    public Rigidbody rb;
+    //Vector2 defaultScale;
+    Vector2 startTapAngle;
+
+    public float scaleX;
+    public float scaleY;
+    public float scaleZ;
 
     void Start()
     {
-    
+        //defaultScale = transform.localScale;
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-       if(Input.touchCount > 0 && FindObjectOfType<GameManager>().gameState == GameManager.State.InGameEasy)
-       {
-            touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Moved)
+        if (FindObjectOfType<GameManager>().gameState == GameManager.State.InGameEasy)
+        {
+            if (Input.touchCount > 0)
             {
-                transform.position = new Vector3(
-                    transform.position.x + touch.deltaPosition.x * speedModifier,
-                    transform.position.y + touch.deltaPosition.y * speedModifier,
-                    transform.position.z);
+                touch = Input.GetTouch(0);
+
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                   startTapAngle = new Vector2(
+                      touch.position.x,
+                      touch.position.y);
+
+                    gameObject.transform.localScale = new Vector3(scaleX - 0.2f, scaleY - 0.2f, scaleZ);
+
+                    //DOTween.Kill(gameObject);
+                    //transform.DOScale(defaultScale * 1.1f, 0.2f).SetLink(gameObject).SetEase(Ease.OutExpo);
+
+                } else if (touch.phase == TouchPhase.Moved)
+                {
+                    
+                } else  if (touch.phase == TouchPhase.Ended)
+                {
+                    Vector2 tapAngle = new Vector2(
+                        touch.position.x,
+                        touch.position.y);
+
+                    Debug.Log("Distance: " + Vector2.Distance(startTapAngle, tapAngle));
+                    if (Vector2.Distance(startTapAngle, tapAngle) < distanceMin) {
+                        return;
+                    }
+
+                    float angleFinal = Angle((tapAngle - startTapAngle).normalized);
+                    Debug.Log(angleFinal);
+
+
+                    if (angleFinal > 45 && angleFinal < 135)
+                    {
+                        // Droite
+                        rb.velocity = speedLaunch * new Vector3(1, 0, 0);
+                        /*DOTween.Kill(gameObject);
+                        transform.DOScaleX(defaultScale.x * 1.1f, 0.2f).SetLink(gameObject).SetEase(Ease.OutExpo);
+                        transform.DOScaleY(defaultScale.y * 0.9f, 0.2f).SetLink(gameObject).SetEase(Ease.OutExpo);
+                        */
+                        gameObject.transform.localScale = new Vector3(scaleX + 0.2f, scaleY - 0.3f, scaleZ);
+                    }
+                    if (angleFinal > 225 && angleFinal < 315)
+                    {
+                        // Gauche
+                        rb.velocity = speedLaunch * new Vector3(-1, 0, 0);
+                        gameObject.transform.localScale = new Vector3(scaleX + 0.2f, scaleY - 0.3f, scaleZ);
+
+                    }
+
+                    if (angleFinal >= 315 || angleFinal <= 45)
+                    {
+                        // Haut
+                        rb.velocity = speedLaunch * new Vector3(0, 2, 0);
+                        gameObject.transform.localScale = new Vector3(scaleX - 0.3f, scaleY + 0.2f, scaleZ);
+
+                    }
+                    if (angleFinal > 135 && angleFinal < 225)
+                    {
+                        // Bas
+                        rb.velocity = speedLaunch * new Vector3(0, -2, 0);
+                        gameObject.transform.localScale = new Vector3(scaleX - 0.3f, scaleY + 0.2f, scaleZ);
+
+                    }
+                }
+
             }
-
         }
-
-        if (transform.position.x <= -0.7) 
-        {
-            Left();
-        }
-        if(transform.position.x <= -0.4 && transform.position.y < 1.8 && transform.position.y > 0.2)
-        {
-            Left();
-        }
-
-        if (transform.position.x >= 0.4 && transform.position.y < 1.8 && transform.position.y > 0.2)
-        {
-            Right();
-        }
-
-        if (transform.position.x >= 0.7)
-        {
-            Right();
-        }
-
-        if (transform.position.y <= 0.2)
-        {
-            Down();
-        }
-
-        if (transform.position.y >= 1.8)
-        {
-            Up();
-        }
-
+      
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("collision: " + collision.gameObject.name);
+        rb.velocity = new Vector3(0,0,0);
         enabled = false;
+        
 
         if ( GetComponent<MeshRenderer>().material.name == collision.gameObject.GetComponent<MeshRenderer>().material.name)
         {
@@ -80,32 +118,26 @@ public class Shapes : MonoBehaviour
         }
 
         FindObjectOfType<GameManager>().RandomColorEasy();
-        Invoke("ResetPos", 0.2f);
+        Invoke("ResetPos", 0.1f);
     }
 
     private void ResetPos()
-    {
-        enabled = true;
+    { 
         transform.position = new Vector3(0, 1, 0);
+        gameObject.transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
+        enabled = true;
     }
 
-    private void Left()
+    public static float Angle(Vector2 vector2)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target3, Time.deltaTime * speedLaunch);
+        if (vector2.x < 0)
+        {
+            return 360 - (Mathf.Atan2(vector2.x, vector2.y) * Mathf.Rad2Deg * -1);
+        }
+        else
+        {
+            return Mathf.Atan2(vector2.x, vector2.y) * Mathf.Rad2Deg;
+        }
     }
 
-    private void Right()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target4, Time.deltaTime * speedLaunch);
-    }
-
-    private void Down()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target2, Time.deltaTime * speedLaunch);
-    }
-
-    private void Up()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target1, Time.deltaTime * speedLaunch);
-    }
 }

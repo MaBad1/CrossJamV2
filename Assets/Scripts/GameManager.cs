@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject muteB;
     [SerializeField] GameObject muteBText;
     [SerializeField] GameObject music;
+    [SerializeField] GameObject nameMe;
 
     public float timer;
     private int timerInt;
@@ -59,6 +60,12 @@ public class GameManager : MonoBehaviour
         InGameMedium,
         InGameHard,
         GameOver
+    }
+
+    private void Awake()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     public State gameState = State.Begining;
@@ -256,6 +263,7 @@ public class GameManager : MonoBehaviour
         mediumB.gameObject.SetActive(false);
         hardB.gameObject.SetActive(false);
         muteB.gameObject.SetActive(false);
+        nameMe.gameObject.SetActive(false);
 
         RandomColorMedium();
 
@@ -279,6 +287,7 @@ public class GameManager : MonoBehaviour
         mediumB.gameObject.SetActive(false);
         hardB.gameObject.SetActive(false);
         muteB.gameObject.SetActive(false);
+        nameMe.gameObject.SetActive(false);
 
         RandomColorHard();
 
@@ -301,6 +310,7 @@ public class GameManager : MonoBehaviour
         mediumB.gameObject.SetActive(false);
         hardB.gameObject.SetActive(false);
         muteB.gameObject.SetActive(false);
+        nameMe.gameObject.SetActive(false);
 
         RandomColorEasy();
 
@@ -391,7 +401,7 @@ public class GameManager : MonoBehaviour
     {
         gameState = State.GameOver;
 
-        if (scoreCurrent > bestScoreCurrent)
+        if (scoreCurrent > bestScoreCurrent && scoreCurrent > PlayerPrefs.GetInt("bestScoreCurrent"))
         {
             PlayerPrefs.SetInt("bestScoreCurrent", scoreCurrent);
             bestScore.GetComponent<Text>().color = Color.yellow;
